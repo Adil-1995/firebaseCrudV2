@@ -19,6 +19,7 @@ export class ProductFilterPipe implements PipeTransform {
           .indexOf(searchTerm.toLowerCase()) !== -1 ||
           product.proveedor.toLowerCase().indexOf(searchTerm.toLowerCase()) !==
           -1
+          //add filter date
     );
   }
 }

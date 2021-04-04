@@ -26,7 +26,9 @@ import {MatTableModule} from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductFilterPipe } from './components/products/products-list/product-filter.pipe';
-
+import { PaginatePipe } from './comopnents/products/product-list/paginate.pipe';
+import {MatPaginatorModule} from '@angular/material/paginator';
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 // import { NgbdTableFiltering } from './table-filtering';
@@ -38,7 +40,8 @@ import { ProductFilterPipe } from './components/products/products-list/product-f
     ProductsComponent,
     ProductsListComponent,
     ProductComponent,
-    ProductFilterPipe
+    ProductFilterPipe,
+    PaginatePipe
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,8 @@ import { ProductFilterPipe } from './components/products/products-list/product-f
     MatTableModule,
     CommonModule,
     ReactiveFormsModule,
+    MatPaginatorModule,
+
 
 
 

@@ -23,7 +23,15 @@
   <div class="form-group mt-2">
     <input type="text" class="form-control" placeholder="Filtrar por código o descripcion" style="width:300px"
       [(ngModel)]="searchTerm" />
+      <mat-paginator [length]="productList.length"
+               [pageSize]="page_size"
+               [pageSizeOptions]="pageSizeOption"
+               (page)="handlePage( $event)">
+</mat-paginator>
   </div>
+
+  <!-- paginator -->
+
   <div class="mat-elevation-z8">
     <table class="table table-sm table-hover">
       <thead>
@@ -37,8 +45,8 @@
         </tr>
     </thead>
       <tbody>
-
-        <tr *ngFor="let product of productList | employeeFilter:searchTerm">
+        <!-- paginate:page_size:page_number -->
+        <tr *ngFor="let product of productList |employeeFilter:searchTerm ">
           <td>{{ product.codigo }}</td>
           <td>{{ product.descripcion }}</td>
           <td>{{ product.proveedor }}</td>
@@ -61,6 +69,7 @@
     </table>
   </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

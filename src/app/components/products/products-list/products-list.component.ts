@@ -1,20 +1,23 @@
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { filter } from 'rxjs/operators';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import { AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss'],
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent implements OnInit  {
+
   searchTerm: string;
   listData: MatTableDataSource<any>;
    searchKey: string;
@@ -23,11 +26,18 @@ export class ProductsListComponent implements OnInit {
   productList: Product[];
   closeResult = '';
   GivenDate = '2021-01-01';
+
+  page_size: number = 10;
+  page_number: number = 1;
+  pageSizeOption = [5, 10, 20, 100];
+
+
   constructor(
     public productService: ProductService,
     // private toastr: ToastrService,
     // private modalService: NgbModal
   ) {}
+
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
@@ -91,16 +101,10 @@ export class ProductsListComponent implements OnInit {
     }
   }
 
-  // applyFilter(filterValue: string){
-  //   this.listData.filter = filterValue.trim().toLocaleLowerCase();
+  handlePage(e: PageEvent){
+    this.page_size =e.pageSize
+    this.page_number = e.pageIndex +1
 
-  // }
-  onSearchClear() {
-    this.searchKey = '';
-    this.applyFilter();
-  }
-  applyFilter() {
-    this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 
 
