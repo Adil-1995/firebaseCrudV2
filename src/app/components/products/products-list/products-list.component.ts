@@ -8,7 +8,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { filter } from 'rxjs/operators';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AfterViewInit } from '@angular/core';
 
 @Component({
@@ -16,12 +16,10 @@ import { AfterViewInit } from '@angular/core';
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss'],
 })
-export class ProductsListComponent implements OnInit  {
-
+export class ProductsListComponent implements OnInit {
   searchTerm: string;
   listData: MatTableDataSource<any>;
-   searchKey: string;
-  // tslint:disable-next-line:no-inferrable-types
+  searchKey: string;
   isEditable: boolean = false;
   productList: Product[];
   closeResult = '';
@@ -31,13 +29,7 @@ export class ProductsListComponent implements OnInit  {
   page_number: number = 1;
   pageSizeOption = [5, 10, 20, 100];
 
-
-  constructor(
-    public productService: ProductService,
-    // private toastr: ToastrService,
-    // private modalService: NgbModal
-  ) {}
-
+  constructor(public productService: ProductService) {}
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
@@ -54,7 +46,6 @@ export class ProductsListComponent implements OnInit  {
           this.productList.push(x as Product);
         });
       });
-
   }
 
   // tslint:disable-next-line:member-ordering
@@ -66,7 +57,7 @@ export class ProductsListComponent implements OnInit  {
   onDeletet($key: string) {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -79,8 +70,6 @@ export class ProductsListComponent implements OnInit  {
       }
     });
   }
-
-  //////////////// product //////
   onSubmit(productForm: NgForm) {
     if (productForm.value.$key == null) {
       this.productService.insertProduct(productForm.value);
@@ -101,14 +90,29 @@ export class ProductsListComponent implements OnInit  {
     }
   }
 
-  handlePage(e: PageEvent){
-    this.page_size =e.pageSize
-    this.page_number = e.pageIndex +1
-
+  handlePage(e: PageEvent) {
+    this.page_size = e.pageSize;
+    this.page_number = e.pageIndex + 1;
   }
 
+  // checkDate() {
+  //   const miFecha = this.productList.map((value) => value.fechaCaducidad);
+  //   var date1 = new Date('2021-01-01');
+  //   if ( miFecha.getTime() > date1.getTime()) {
+  //    alert("heyyyyyyyyyy")
+  //   }
+  //   console.log(miFecha);
 
+  // }
 
-
+//   CompareDate() {
+//     //Note: 00 is month i.e. January
+//     var dateOne = new Date(2010, 00, 15); //Year, Month, Date
+//     var dateTwo = new Date(2011, 00, 15); //Year, Month, Date
+//     if (dateOne > dateTwo) {
+//          alert("Date One is greater than Date Two.");
+//      }else {
+//          alert("Date Two is greater than Date One.");
+//      }
+//  }
 }
-

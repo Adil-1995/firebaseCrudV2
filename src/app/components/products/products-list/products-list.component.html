@@ -1,6 +1,5 @@
-<div  >
-  <img width="300" class="center"
-  src="../../../assets/img/eurospar.webp">
+<div>
+  <img width="300" class="center" src="../../../assets/img/SparLogo.png">
 
 </div>
 
@@ -13,9 +12,9 @@
     </button>
   </div>
   <!-- button -->
-  <button type="button" class="btn btn-warning float-right">
-    <!-- <img width="50" height="30" src="../../../../assets/img/expired.svg" alt="expired"> -->
-    <i class="fa fa-hourglass-end fa-lg"></i>
+  <button   class="btn btn-warning float-right" matBadgeSize="large" mat-raised-button color="primary" matBadge="8" matBadgePosition="before"
+    matBadgeColor="accent">
+    <i class="fa fa-hourglass-end fa-lg ml-3"></i>
     Próxima Caducidad
   </button>
   <!-- buscar -->
@@ -23,11 +22,6 @@
   <div class="form-group mt-2">
     <input type="text" class="form-control" placeholder="Filtrar por código o descripcion" style="width:300px"
       [(ngModel)]="searchTerm" />
-      <mat-paginator [length]="productList.length"
-               [pageSize]="page_size"
-               [pageSizeOptions]="pageSizeOption"
-               (page)="handlePage( $event)">
-</mat-paginator>
   </div>
 
   <!-- paginator -->
@@ -43,7 +37,7 @@
           <th scope="col">Editar</th>
           <th scope="col">Eliminar</th>
         </tr>
-    </thead>
+      </thead>
       <tbody>
         <!-- paginate:page_size:page_number -->
         <tr *ngFor="let product of productList |employeeFilter:searchTerm ">
@@ -61,13 +55,16 @@
           <td>
             <button (click)="onDeletet(product.$key)" type="button" class="btn btn-danger">
               <i class="fa fa-trash"></i>
-              Eliminar
+
             </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <!-- <mat-paginator [length]="productList.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOption"
+  (page)="handlePage( $event)">
+</mat-paginator> -->
 </div>
 
 
