@@ -19,6 +19,7 @@
   </button>
   <!-- buscar -->
 
+
   <div class="form-group mt-2">
     <input type="text" class="form-control" placeholder="Filtrar por código o descripcion" style="width:300px"
       [(ngModel)]="searchTerm" />
@@ -41,7 +42,7 @@
       <tbody>
         <!-- paginate:page_size:page_number -->
         <tr *ngFor="let product of productList |employeeFilter:searchTerm ">
-          <td>{{ product.codigo }}</td>
+          <td> {{product.codigo}} </td>
           <td>{{ product.descripcion }}</td>
           <td>{{ product.proveedor }}</td>
           <td>{{ product.fechaCaducidad }}</td>

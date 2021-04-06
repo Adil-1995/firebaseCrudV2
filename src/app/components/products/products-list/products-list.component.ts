@@ -115,4 +115,8 @@ export class ProductsListComponent implements OnInit {
 //          alert("Date Two is greater than Date One.");
 //      }
 //  }
+
+saludarOmar(){
+  alert("hello omar")
+}
 }
