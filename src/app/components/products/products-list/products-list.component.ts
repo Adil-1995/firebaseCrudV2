@@ -95,28 +95,24 @@ export class ProductsListComponent implements OnInit {
     this.page_number = e.pageIndex + 1;
   }
 
-  // checkDate() {
-  //   const miFecha = this.productList.map((value) => value.fechaCaducidad);
-  //   var date1 = new Date('2021-01-01');
-  //   if ( miFecha.getTime() > date1.getTime()) {
-  //    alert("heyyyyyyyyyy")
-  //   }
-  //   console.log(miFecha);
+  checkDate() {
+    var ToDate = new Date();
+    console.log(ToDate);
+    var OneDay = new Date().getTime() + (5 * 24 * 60 * 60 * 1000)
+    console.log(OneDay);
 
-  // }
+    let expiredDate = this.productList[1].fechaCaducidad;
 
-//   CompareDate() {
-//     //Note: 00 is month i.e. January
-//     var dateOne = new Date(2010, 00, 15); //Year, Month, Date
-//     var dateTwo = new Date(2011, 00, 15); //Year, Month, Date
-//     if (dateOne > dateTwo) {
-//          alert("Date One is greater than Date Two.");
-//      }else {
-//          alert("Date Two is greater than Date One.");
-//      }
-//  }
+    console.log('mi fecha de  producto es :' + expiredDate);
 
-saludarOmar(){
-  alert("hello omar")
-}
+    var res =
+      new Date(this.productList[1].fechaCaducidad).getTime() -
+      new Date(OneDay).getTime() ;
+    if (res) {
+      alert('my date is less than today');
+    } else {
+      alert('Product has been ended');
+    }
+
+  }
 }

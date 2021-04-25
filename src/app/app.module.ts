@@ -29,9 +29,8 @@ import { ProductFilterPipe } from './components/products/products-list/product-f
 import { PaginatePipe } from './comopnents/products/product-list/paginate.pipe';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatBadgeModule} from '@angular/material/badge';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
-
-// import { NgbdTableFiltering } from './table-filtering';
 
 
 @NgModule({
@@ -61,10 +60,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     CommonModule,
     ReactiveFormsModule,
     MatPaginatorModule,
-    MatBadgeModule
-
-
-
+    MatBadgeModule,
+    MDBBootstrapModule.forRoot()
 
 
   ],
