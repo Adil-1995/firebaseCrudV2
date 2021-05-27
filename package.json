@@ -38,6 +38,7 @@
     "hammerjs": "^2.0.8",
     "ionicons": "^5.5.1",
     "mdbootstrap": "^4.19.2",
+    "moment": "^2.29.1",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.15.7",

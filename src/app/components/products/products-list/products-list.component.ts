@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { filter } from 'rxjs/operators';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AfterViewInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-products-list',
@@ -94,12 +95,18 @@ export class ProductsListComponent implements OnInit {
     this.page_size = e.pageSize;
     this.page_number = e.pageIndex + 1;
   }
+  firstDate = moment().subtract(2, 'days').calendar();
+
 
   checkDate() {
+
+    console.log("Moment date is :" + this.firstDate);
+
     var ToDate = new Date();
     console.log(ToDate);
-    var OneDay = new Date().getTime() + (5 * 24 * 60 * 60 * 1000)
+    var OneDay = new Date().getTime() + (1 * 24 * 60 * 60 * 1000)
     console.log(OneDay);
+
 
     let expiredDate = this.productList[1].fechaCaducidad;
 
