@@ -5,64 +5,38 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
   <mdb-navbar-brand>
 
-      <a class="navbar-brand" href="">
-        <i class="fa fa-home fa-lg mr-2"></i>Home</a>
+    <a class="navbar-brand" href="">
+      <i class="fa fa-home fa-lg mr-2"></i>Home</a>
   </mdb-navbar-brand>
   <links>
-      <ul class="navbar-nav">
-        <li class="nav-item" data-toggle="modal" data-target="#exampleModal">
-          <a class="nav-link waves-light" mdbWavesEffect>
-            <i class="fa fa-plus-square fa-lg mr-2"></i>Añadir articulo</a>
+    <ul class="navbar-nav">
+      <li class="nav-item" data-toggle="modal" data-target="#exampleModal">
+        <a class="nav-link waves-light" mdbWavesEffect>
+          <i class="fa fa-plus-square fa-lg mr-2"></i>Añadir articulo</a>
       </li>
-          <li class="nav-item" matBadgeSize="large" mat-raised-button color="primary" matBadge="8" matBadgePosition="after"  matBadgeColor="accent">
-              <a class="nav-link waves-light" mdbWavesEffect>
-                <i class="fa fa-hourglass-end fa-lg ml-3 mr-2" (click)="checkDate()"></i>Próxima Caducidad</a>
-          </li>
-      </ul>
+      <li class="nav-item" matBadgeSize="large" mat-raised-button color="primary" [matBadge]=newProducts.length
+        matBadgePosition="after" matBadgeColor="accent">
+        <a class="nav-link waves-light" mdbWavesEffect>
+          <i class="fa fa-hourglass-end fa-lg ml-3 mr-2" (click)="show=false"></i>Próxima Caducidad</a>
+      </li>
+    </ul>
 
-      <div class="float-right ml-5">
-        <input type="text" class="form-control" placeholder="Filtrar por código o descripcion" style="width:300px; float: right; clear: both;"
-          [(ngModel)]="searchTerm" />
-      </div>
-        <!-- <form class="form-inline waves-light float-right " mdbWavesEffect >
-          <div class="md-form my-0 ">
-
-            <input type="text" class="form-control mr-sm-2 ml-5" placeholder="Filtrar por código o descripcion" style="width:300px;"
-        [(ngModel)]="searchTerm" />
-          </div>
-        </form> -->
+    <div class="float-right ml-5">
+      <input type="text" class="form-control" placeholder="Filtrar por código o descripcion"
+        style="width:300px; float: right; clear: both;" [(ngModel)]="searchTerm" />
+    </div>
 
   </links>
-
-
 
 </mdb-navbar>
 <!--/.Navbar-->
 <div class="card-body">
-  <!-- button -->
-  <!-- <div class="mt-5">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      <i class="fa fa-plus-square fa-lg"></i>
-      Añadir artículo
-    </button>
-  </div>
-
-  <button   class="btn btn-warning float-right" matBadgeSize="large" mat-raised-button color="primary" matBadge="8" matBadgePosition="before"
-    matBadgeColor="accent">
-    <i class="fa fa-hourglass-end fa-lg ml-3"></i>
-    Próxima Caducidad
-  </button> -->
-  <!-- buscar -->
-
-
-
-
   <!-- paginator -->
 
   <div class="mat-elevation-z8">
     <table class="table table-sm table-hover">
-      <thead style="background-color: rgba(84, 209, 84, 0.938); height: 90px;">
-        <tr >
+      <thead style="background-color: rgba(84, 209, 84, 0.938); height: 50px;">
+        <tr>
           <th scope="col">Código</th>
           <th scope="col">Descprición</th>
           <th scope="col">Proveedor</th>
@@ -73,7 +47,9 @@
       </thead>
       <tbody>
         <!-- paginate:page_size:page_number -->
+
         <tr *ngFor="let product of productList |employeeFilter:searchTerm ">
+          <ng-container *ngIf="show">
           <td> {{product.codigo}} </td>
           <td>{{ product.descripcion }}</td>
           <td>{{ product.proveedor }}</td>
@@ -91,13 +67,35 @@
 
             </button>
           </td>
+        </ng-container>
         </tr>
+
+        <tr *ngFor="let product of newProducts |employeeFilter:searchTerm ">
+          <ng-container *ngIf="show ==false" >
+          <td> {{product.codigo}} </td>
+          <td>{{ product.descripcion }}</td>
+          <td>{{ product.proveedor }}</td>
+          <td>{{ product.fechaCaducidad }}</td>
+          <td>
+            <button (click)="onEdit(product)" data-toggle="modal" data-target="#exampleModal" type="button"
+              class="btn btn-warning">
+              <i class="fa fa-edit fa-lg"></i>
+              Actualizar Fecha
+            </button>
+          </td>
+          <td>
+            <button (click)="onDeletet(product.$key)" type="button" class="btn btn-danger">
+              <i class="fa fa-trash"></i>
+
+            </button>
+          </td>
+        </ng-container>
+        </tr>
+
       </tbody>
     </table>
   </div>
-  <!-- <mat-paginator [length]="productList.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOption"
-  (page)="handlePage( $event)">
-</mat-paginator> -->
+
 </div>
 
 

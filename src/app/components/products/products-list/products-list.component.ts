@@ -6,11 +6,10 @@ import Swal from 'sweetalert2';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { filter } from 'rxjs/operators';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { AfterViewInit } from '@angular/core';
+
+import { PageEvent } from '@angular/material/paginator';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
@@ -19,20 +18,17 @@ import * as moment from 'moment';
 })
 export class ProductsListComponent implements OnInit {
   searchTerm: string;
-  listData: MatTableDataSource<any>;
   searchKey: string;
   isEditable: boolean = false;
   productList: Product[];
-  closeResult = '';
-  GivenDate = '2021-01-01';
-
+  newProducts: any[] = [];
+  show: boolean = true;
   page_size: number = 10;
   page_number: number = 1;
   pageSizeOption = [5, 10, 20, 100];
 
-  constructor(public productService: ProductService) {}
+  constructor(public productService: ProductService,   private router: Router) {}
 
-  // tslint:disable-next-line:typedef
   ngOnInit() {
     return this.productService
       .getProducts()
@@ -40,19 +36,37 @@ export class ProductsListComponent implements OnInit {
       .subscribe((item) => {
         this.productList = [];
         item.forEach((element) => {
-          // tslint:disable-next-line:prefer-const
           let x = element.payload.toJSON();
-          // tslint:disable-next-line:no-string-literal
           x!['$key'] = element.key;
           this.productList.push(x as Product);
         });
+
+        this.checkDate();
       });
   }
+  toHome() {
+    console.log("works");
+    this.router.navigate(['/home']);
+  }
 
-  // tslint:disable-next-line:member-ordering
+  checkDate() {
+    let startdate = moment().subtract(2, 'days').format('l');
+    console.log('Moment date is :' + startdate);
+
+    for (let i = 0; i < this.productList.length; i++) {
+      var currentNumber = this.productList[i].fechaCaducidad;
+      const isEqual = moment(currentNumber).isSame(startdate);
+      if (isEqual) {
+        this.newProducts.push(this.productList[i]);
+      }
+    }
+    console.log(this.newProducts);
+  }
+
   onEdit(product: Product) {
     this.isEditable = true;
     this.productService.selectedProduct = Object.assign({}, product);
+
   }
 
   onDeletet($key: string) {
@@ -79,9 +93,9 @@ export class ProductsListComponent implements OnInit {
         'You clicked the button!',
         'success'
       );
-      // tslint:disable-next-line:curly
     } else this.productService.updateProduct(productForm.value);
     this.resetForm(productForm);
+    window.location.reload();
   }
 
   resetForm(productForm?: NgForm) {
@@ -94,32 +108,5 @@ export class ProductsListComponent implements OnInit {
   handlePage(e: PageEvent) {
     this.page_size = e.pageSize;
     this.page_number = e.pageIndex + 1;
-  }
-  firstDate = moment().subtract(2, 'days').calendar();
-
-
-  checkDate() {
-
-    console.log("Moment date is :" + this.firstDate);
-
-    var ToDate = new Date();
-    console.log(ToDate);
-    var OneDay = new Date().getTime() + (1 * 24 * 60 * 60 * 1000)
-    console.log(OneDay);
-
-
-    let expiredDate = this.productList[1].fechaCaducidad;
-
-    console.log('mi fecha de  producto es :' + expiredDate);
-
-    var res =
-      new Date(this.productList[1].fechaCaducidad).getTime() -
-      new Date(OneDay).getTime() ;
-    if (res) {
-      alert('my date is less than today');
-    } else {
-      alert('Product has been ended');
-    }
-
   }
 }
