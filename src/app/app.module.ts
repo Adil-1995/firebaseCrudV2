@@ -31,6 +31,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 @NgModule({
@@ -61,6 +63,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatBadgeModule,
+    FlexLayoutModule,
     MDBBootstrapModule.forRoot()
 
 

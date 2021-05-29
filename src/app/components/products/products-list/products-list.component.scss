@@ -32,3 +32,35 @@ h3{
 //   height: 40px;
 //   line-height: 40px;
 // }
+header {
+  padding: 20px;
+  position: relative;
+  background: #2992e9;
+  height: 10vh;
+  flex-wrap: wrap;
+  border-bottom-left-radius: 70% 30%;
+  border-bottom-right-radius:70% 30%;
+
+}
+a {
+font-family: 'Fira Sans',sans-serif;
+font-size: 19px;
+letter-spacing: 1px;
+word-spacing: 2px;
+color: #ffffff;
+position: relative;
+text-decoration: none;
+
+}
+a:hover::after {
+  content: "";
+  position: absolute;
+  left: 1%;
+  right:1%;
+  bottom: 0;
+  border: 2px solid rgb(189, 179, 33);
+
+}
+.pi {
+  font-size: 1rem;
+}
